@@ -1,0 +1,35 @@
+
+div, h1, input {
+    font-family: HelveticaNeue, Helvetica;
+}
+
+.content {
+  padding: 20px;
+}
+
+.question-button {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  line-height: 60px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.question-button.is-answered {
+  background-color: #c0ffc0;
+}
+
+.question-button:hover {
+  background-color: #eee;
+}
+.question-button.is-answered:hover {
+  background-color: #8ec08e;
+}
+
+.correct {
+  color: #23bf56;
+}
