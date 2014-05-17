@@ -29,14 +29,6 @@ div, h1, input, button {
   background-color: #eee;
 }
 
-.question-button:hover {
-  background-color: #eee;
-}
-
-.question-button.is-answered:hover {
-  background-color: #8ec08e;
-}
-
 .correct {
   color: #23bf56;
 }
