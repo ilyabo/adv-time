@@ -1,5 +1,6 @@
 
 PROF = dev
+#PROF = prod
 #PROF = dev,test,srcmap
 # PROF = prod,test
 # PROF = prod
@@ -16,6 +17,10 @@ openbrowser:
 autocompile:
 	rm -rf target
 	lein with-profile $(PROF) cljsbuild auto $(CLJSBUILD)
+
+prod:
+	rm -rf target
+	lein with-profile prod cljsbuild once $(CLJSBUILD)
 
 clean:
 	lein -o clean
