@@ -18,6 +18,36 @@
     :valid-answer #"(?i)A"
     }
 
+
+   {:id "3"
+    :text "There is a painted barrel with a vehicle on it. What kind of vehicle is it?"
+    :valid-answer #"(?i)airplane"
+    }
+
+
+   {:id "4"
+    :text "Stand on the 6th step from below uphill and look to the left.
+    There is a tall tree. What kind of tree is that?"
+    :valid-answer #"(?i)oak"
+    }
+
+
+   {:id "5"
+    :text "Find the tree marked with W. Look behind it to the stream flowing down.
+    There is a fallen tree crossing the stream. In which compass direction does the stream flow under the tree?
+    (Enter one of N, W, E, S, SE, NW, ...)"
+    :valid-answer #"(?i)SE"
+    }
+
+
+   {:id "6"
+    :text "When was the bridge built?"
+    :valid-answer #"1975"
+    }
+
+
+
+
    {
     :id "finish"
     :text "The coordinates of the finish point are: lat=47.367332 lon=8.578927"
@@ -28,7 +58,7 @@
 
 
 
-(def score-needed-to-unlock 1.5)
+(def score-needed-to-unlock 5)
 
 (def app-state
   (local-storage (reagent/atom {
@@ -109,7 +139,7 @@
 
 (defn question-buttons-list [questions]
   [:div
-    [:div {:className "score"} (str "Score: " (:score @app-state))]
+    [:div {:className "score"} (str "Score: " (.toFixed (:score @app-state) 2))]
     [:div (for [q questions] ^{:key (:id q)} [question-button q])]
     (if (is-locked)
       [:div {:className "score-comment"}
