@@ -1,6 +1,6 @@
 
 PROF = dev
-# PROF = dev,test,srcmap
+#PROF = dev,test,srcmap
 # PROF = prod,test
 # PROF = prod
 
@@ -8,7 +8,7 @@ CLJSBUILD = client
 
 all: autocompile
 
-run: openbrowser autocompile
+run: autocompile
 
 openbrowser:
 	(sleep 1 && open index.html) &

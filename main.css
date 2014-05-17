@@ -1,20 +1,20 @@
 
-div, h1, input {
-    font-family: HelveticaNeue, Helvetica;
+div, h1, input, button {
+  font-family: Sunshiney, HelveticaNeue, Helvetica;
+  font-size: 20px;
 }
 
 .content {
-  padding: 20px;
+  padding: 15px;
 }
 
-.question-button {
+.button.question-button {
+  background-color: white;
   width: 60px;
   height: 60px;
   text-align: center;
   line-height: 60px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 5px;
+  margin: 5px 5px 5px 0px;
   cursor: pointer;
   display: inline-block;
 }
@@ -22,10 +22,17 @@ div, h1, input {
 .question-button.is-answered {
   background-color: #c0ffc0;
 }
+.question-button.need-lock {
+  background-color: #fffcb4;
+}
+.question-button.need-lock.is-disabled {
+  background-color: #eee;
+}
 
 .question-button:hover {
   background-color: #eee;
 }
+
 .question-button.is-answered:hover {
   background-color: #8ec08e;
 }
@@ -33,3 +40,42 @@ div, h1, input {
 .correct {
   color: #23bf56;
 }
+
+
+.question-view {
+}
+
+.question {
+  margin-top: 20px;
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 0;
+}
+
+.answer-textfield {
+  width: 95%;
+  height: 20px;
+  margin: 10px 0px;
+  border-radius: 5px;
+  display: block;
+}
+
+.answered {
+  margin: 20px 0px;
+}
+
+.attempts {
+  margin: 20px 0px;
+  color: #ffa0a0;
+}
+
+.score-comment {
+  color: #888;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
