@@ -8,44 +8,20 @@
 (def questions [
    {
     :id "1"
-    :text "Where was the old blue tram with the full number 1530 once heading?"
-    :valid-answer #"(?i)Bellevue"
+    :text "What is 2+2?"
+    :valid-answer #"(?i)4"
     }
    {
-    :id "2"
-    :text "There is a bad replica of the logo of a well known company.
-           In this replica one letter is used with its own reflection. Which letter is it?"
-    :valid-answer #"(?i)A"
+     :id "2"
+     :text "What is 3+2?"
+     :valid-answer #"(?i)5"
     }
 
-
-   {:id "3"
-    :text "There is a painted barrel with a vehicle on it. What kind of vehicle is it?"
-    :valid-answer #"(?i)airplane"
+   {
+     :id "3"
+     :text "What is 3+4?"
+     :valid-answer #"(?i)7"
     }
-
-
-   {:id "4"
-    :text "Stand on the 6th step from below uphill and look to the left.
-    There is a tall tree. What kind of tree is that?"
-    :valid-answer #"(?i)oak"
-    }
-
-
-   {:id "5"
-    :text "Find the tree marked with W. Look behind it to the stream flowing down.
-    There is a fallen tree crossing the stream. In which compass direction does the stream flow under the tree?
-    (Enter one of N, W, E, S, SE, NW, ...)"
-    :valid-answer #"(?i)SE"
-    }
-
-
-   {:id "6"
-    :text "When was the bridge built?"
-    :valid-answer #"1975"
-    }
-
-
 
 
    {
@@ -57,8 +33,7 @@
    ])
 
 
-
-(def score-needed-to-unlock 5)
+(def score-needed-to-unlock 2)
 
 (def app-state
   (local-storage (reagent/atom {
