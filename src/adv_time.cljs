@@ -75,7 +75,7 @@
   (first (filter #(= id (:id %)) questions)))
 
 (defn answer-score [attempts]
-  (/ 1.0 attempts))
+  (/ 1.0 (Math/sqrt attempts)))
 
 (defn submit-answer [qid a]
   (let [q        (find-question qid)
