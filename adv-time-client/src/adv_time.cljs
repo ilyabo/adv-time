@@ -7,34 +7,25 @@
 
 (def questions [
    {
-    :id "1"
-    :text "What is 2+2?"
-    :valid-answer #"(?i)4"
-    }
-   {
-     :id "2"
-     :text "What is 3+2?"
-     :valid-answer #"(?i)5"
-    }
-
-   {
-     :id "3"
-     :text "What is 3+4?"
-     :valid-answer #"(?i)7"
+    :id "P0"
+    :text "You should see a totem pole in which one particular animal is represented exactly 8 times.
+           Which animal is it?"
+    :valid-answer #"(?i)fish"
     }
 
 
    {
     :id "finish"
-    :text "Use the following link to import the finish waypoint: "
-    :link "https://www.dropbox.com/meta_dl/eyJzdWJfcGF0aCI6ICIiLCAidGVzdF9saW5rIjogZmFsc2UsICJzZXJ2ZXIiOiAiZGwuZHJvcGJveHVzZXJjb250ZW50LmNvbSIsICJpdGVtX2lkIjogbnVsbCwgImlzX2RpciI6IGZhbHNlLCAidGtleSI6ICJ2MTR2MzNqOWpnM3hkamkifQ/AAK7xDZaAMi4tq4z_IJOWOdtO0OW-qtWzsMn3yTT7SIyGQ?dl=1"
+    :text "Here there will be the final directions."
+    ;:text "Use the following link to import the finish waypoint: "
+    ;:link "https://www.dropbox.com/meta_dl/eyJzdWJfcGF0aCI6ICIiLCAidGVzdF9saW5rIjogZmFsc2UsICJzZXJ2ZXIiOiAiZGwuZHJvcGJveHVzZXJjb250ZW50LmNvbSIsICJpdGVtX2lkIjogbnVsbCwgImlzX2RpciI6IGZhbHNlLCAidGtleSI6ICJ2MTR2MzNqOWpnM3hkamkifQ/AAK7xDZaAMi4tq4z_IJOWOdtO0OW-qtWzsMn3yTT7SIyGQ?dl=1"
     :need-lock      true
     :non-answerable true
     }
    ])
 
 
-(def score-needed-to-unlock 2)
+(def score-needed-to-unlock 0.5)
 
 (def app-state
   (local-storage (reagent/atom {
@@ -114,7 +105,7 @@
               :disabled  disabled?
               :on-click #(swap! app-state assoc :selected-question-id (:id q)) }
      (if disabled?
-       "?"
+       "LOCKED"
        (:id q)) ]))
 
 (defn question-buttons-list [questions]
@@ -123,7 +114,7 @@
     [:div (for [q questions] ^{:key (:id q)} [question-button q])]
     (if (is-locked)
       [:div {:className "score-comment"}
-       (str "You need at least " score-needed-to-unlock " points to unlock the hidden item.")])
+       (str "You need at least " score-needed-to-unlock " points to unlock the locked items.")])
     ])
 
 
