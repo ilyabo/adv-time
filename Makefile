@@ -5,6 +5,8 @@ PROF = dev
 # PROF = prod,test
 # PROF = prod
 
+CLIENT_PATH=adv-time-client
+
 CLJSBUILD = client
 
 all: autocompile
@@ -15,12 +17,16 @@ openbrowser:
 	(sleep 1 && open index.html) &
 
 autocompile:
-	rm -rf target
+	@cd "$(CLIENT_PATH)" && \
+	rm -rf target  && \
 	lein with-profile $(PROF) cljsbuild auto $(CLJSBUILD)
 
 prod:
-	rm -rf target
-	lein with-profile prod cljsbuild once $(CLJSBUILD)
+	@cd "$(CLIENT_PATH)" && \
+	rm -rf target && \
+	lein with-profile prod cljsbuild once $(CLJSBUILD) && \
+	cp target/$(CLJSBUILD).js ..
 
 clean:
+	@cd "$(CLIENT_PATH)" && \
 	lein -o clean
