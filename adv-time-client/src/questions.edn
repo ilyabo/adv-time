@@ -19,16 +19,13 @@
 
 
    {:id "4"
-    :text "Stand on the 6th step from below uphill and look to the left.
-    There is a tall tree. What kind of tree is that?"
+    :text "Stand on the 6th step from below uphill and look to the left. There is a tall tree. What kind of tree is that?"
     :valid-answer #"(?i)oak"
     }
 
 
    {:id "5"
-    :text "Find the tree marked with W. Look behind it to the stream flowing down.
-    There is a fallen tree crossing the stream. In which compass direction does the stream flow under the tree?
-    (Enter one of N, W, E, S, SE, NW, ...)"
+    :text "Find the tree marked with W. Look behind it to the stream flowing down. There is a fallen tree crossing the stream. In which compass direction does the stream flow under the tree? (Enter one of N, W, E, S, SE, SW, NW, NE)"
     :valid-answer #"(?i)SE"
     }
 

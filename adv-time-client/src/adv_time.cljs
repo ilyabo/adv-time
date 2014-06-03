@@ -26,7 +26,8 @@
 
    {
     :id "finish"
-    :text "The coordinates of the finish point are: lat=47.367332 lon=8.578927"
+    :text "Use the following link to import the finish waypoint: "
+    :link "https://www.dropbox.com/meta_dl/eyJzdWJfcGF0aCI6ICIiLCAidGVzdF9saW5rIjogZmFsc2UsICJzZXJ2ZXIiOiAiZGwuZHJvcGJveHVzZXJjb250ZW50LmNvbSIsICJpdGVtX2lkIjogbnVsbCwgImlzX2RpciI6IGZhbHNlLCAidGtleSI6ICJ2MTR2MzNqOWpnM3hkamkifQ/AAK7xDZaAMi4tq4z_IJOWOdtO0OW-qtWzsMn3yTT7SIyGQ?dl=1"
     :need-lock      true
     :non-answerable true
     }
@@ -76,7 +77,11 @@
           [:button { :className "button back-button"
                      :on-click #(swap! app-state dissoc :selected-question-id)} "<< back"]
           [:div {:className "question"} (:text q)]
-          (if-not (:non-answerable q)
+          (if (:non-answerable q)
+
+            (if (:link q)
+              [:a {:href (:link q)} "Link"])
+
             (if  answered
               [:div
                 [:div {:className "answered"} (str "Answered: " answered)]
