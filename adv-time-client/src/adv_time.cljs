@@ -22,8 +22,12 @@
 (defn find-question [id]
   (first (filter #(= id (:id %)) questions)))
 
+(defn round-to-2 [num]
+  (/ (Math/round (* num 100)) 100))
+
+
 (defn answer-score [attempts]
-  (/ 1.0 (Math/sqrt attempts)))
+  (round-to-2 (/ 1.0 (Math/sqrt attempts))))
 
 (defn submit-answer [qid a]
   (let [q        (find-question qid)
