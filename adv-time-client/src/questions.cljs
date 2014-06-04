@@ -1,0 +1,3 @@
+(ns advtime.questions)(def questions [{:id "P0", :text "Walk to the point by using Commander Compass Lite to navigate. There you should see a totem pole in which one particular animal is represented exactly 8 times. What animal is it?", :valid-answer "8", :need-lock false, :non-answerable false}
+{:id "F", :text "Great, it worked! You unlocked this item!", :valid-answer "", :need-lock true, :non-answerable true}
+])
