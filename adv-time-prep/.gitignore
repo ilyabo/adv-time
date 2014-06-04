@@ -1,6 +1,0 @@
-.idea
-.nrepl-port
-*.iml
-target/
-lib/
-.lein-repl-history
