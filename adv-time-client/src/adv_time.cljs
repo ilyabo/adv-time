@@ -1,31 +1,12 @@
 
 (ns advtime
   (:require [reagent.core :as reagent :refer [atom]]
-            [alandipert.storage-atom :refer [local-storage]]))
+            [alandipert.storage-atom :refer [local-storage]]
+            [advtime.questions :refer [questions]]))
 
 
 
-(def questions [
-   {
-    :id "P0"
-    :text "You should see a totem pole in which one particular animal is represented exactly 8 times.
-           Which animal is it?"
-    :valid-answer #"(?i)fish"
-    }
-
-
-   {
-    :id "finish"
-    :text "Here there will be the final directions."
-    ;:text "Use the following link to import the finish waypoint: "
-    ;:link "https://www.dropbox.com/meta_dl/eyJzdWJfcGF0aCI6ICIiLCAidGVzdF9saW5rIjogZmFsc2UsICJzZXJ2ZXIiOiAiZGwuZHJvcGJveHVzZXJjb250ZW50LmNvbSIsICJpdGVtX2lkIjogbnVsbCwgImlzX2RpciI6IGZhbHNlLCAidGtleSI6ICJ2MTR2MzNqOWpnM3hkamkifQ/AAK7xDZaAMi4tq4z_IJOWOdtO0OW-qtWzsMn3yTT7SIyGQ?dl=1"
-    :need-lock      true
-    :non-answerable true
-    }
-   ])
-
-
-(def score-needed-to-unlock 0.5)
+(def score-needed-to-unlock (* (- (count questions) 1) 0.58))
 
 (def app-state
   (local-storage (reagent/atom {
@@ -46,7 +27,7 @@
 
 (defn submit-answer [qid a]
   (let [q        (find-question qid)
-        correct  (re-matches (:valid-answer q) a)]
+        correct  (re-matches (re-pattern (str "(?i)" (:valid-answer q))) a)]
 
     (swap! app-state update-in [:attempts qid] inc)
 
@@ -67,7 +48,7 @@
         [:div {:className "question-view"}
           [:button { :className "button back-button"
                      :on-click #(swap! app-state dissoc :selected-question-id)} "<< back"]
-          [:div {:className "question"} (:text q)]
+          [:div {:className "question"} [:b {} (:id q) ": "] (:text q)]
           (if (:non-answerable q)
 
             (if (:link q)
@@ -105,7 +86,7 @@
               :disabled  disabled?
               :on-click #(swap! app-state assoc :selected-question-id (:id q)) }
      (if disabled?
-       "LOCKED"
+       "\u00A0"
        (:id q)) ]))
 
 (defn question-buttons-list [questions]
@@ -114,7 +95,7 @@
     [:div (for [q questions] ^{:key (:id q)} [question-button q])]
     (if (is-locked)
       [:div {:className "score-comment"}
-       (str "You need at least " score-needed-to-unlock " points to unlock the locked items.")])
+       (str "You need at least " (.toFixed score-needed-to-unlock 2) " points to unlock the last item.")])
     ])
 
 

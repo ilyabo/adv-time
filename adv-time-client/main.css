@@ -27,6 +27,10 @@ div, h1, input, button {
 }
 .question-button.need-lock.is-disabled {
   background-color: #eee;
+  background-image: url('http://upload.wikimedia.org/wikipedia/commons/0/0b/High-contrast-system-lock-screen.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
 }
 
 .correct {
