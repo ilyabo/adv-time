@@ -4,12 +4,13 @@
 
 (def questions-url
   ; complete list
-  "https://docs.google.com/spreadsheets/d/1ujunUo814pBMMCNxo4NTLrWM3Ph59R_KZI3wW4Ok7do/export?format=csv")
+  ;"https://docs.google.com/spreadsheets/d/1ujunUo814pBMMCNxo4NTLrWM3Ph59R_KZI3wW4Ok7do/export?format=csv")
 
   ; test
-  ;"https://docs.google.com/spreadsheets/d/1ujunUo814pBMMCNxo4NTLrWM3Ph59R_KZI3wW4Ok7do/export?format=csv&gid=662795327")
+  "https://docs.google.com/spreadsheets/d/1ujunUo814pBMMCNxo4NTLrWM3Ph59R_KZI3wW4Ok7do/export?format=csv&gid=662795327")
 
-
+(def waypoints-outfile "../adv-time-client/waypoints.spyglass")
+(def questions-outfile "../adv-time-client/src/questions.cljs")
 
 
 (defn prepare-row [row]
@@ -22,12 +23,12 @@
   })
 
 
-(defn save-questions [data]
+(defn save-questions [data outfile]
   ;(dt/save-to-csv data "../adv-time-client/questions.csv"
   ;                :columns [:id :text :valid-answer])
 
-
-  (spit "../adv-time-client/src/questions.cljs"
+  (println "Writing" (count data) "questions to" outfile)
+  (spit outfile
         (str
           '(ns advtime.questions)
           "(def questions ["
@@ -39,8 +40,9 @@
 
 
 
-(defn save-waypoints [data]
-  (spit "../adv-time-client/waypoints.spyglass"
+(defn save-waypoints [data outfile]
+  (println "Writing" (count data) "waypoints to" outfile)
+  (spit outfile
     (apply str
       (for [row data
             :when (not= (:need-lock row) "true")]
@@ -61,7 +63,8 @@
 
 
 (defn -main [& args]
+  (println "Loading questions from " questions-url)
   (let [data (dt/read-csv-input (:body (client/get  questions-url {:insecure? true})))]
-    (save-questions data)
-    (save-waypoints data))
+    (save-questions data questions-outfile)
+    (save-waypoints data waypoints-outfile))
   )
