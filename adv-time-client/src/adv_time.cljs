@@ -6,7 +6,7 @@
 
 
 
-(def score-needed-to-unlock (* (- (count questions) 1) 0.58))
+(def score-needed-to-unlock (* (- (count questions) 1) 0.62))
 
 (def app-state
   (local-storage (reagent/atom {
@@ -30,15 +30,16 @@
   (round-to-2 (/ 1.0 (Math/sqrt attempts))))
 
 (defn submit-answer [qid a]
-  (let [q        (find-question qid)
-        correct  (re-matches (re-pattern (str "(?i)" (:valid-answer q))) a)]
+  (if (> (.-length (.trim a)) 0)
+    (let [q        (find-question qid)
+          correct  (re-matches (re-pattern (str "(?i)" (:valid-answer q))) (.trim a))]
 
-    (swap! app-state update-in [:attempts qid] inc)
+      (swap! app-state update-in [:attempts qid] inc)
 
-    (when correct
-      (swap! app-state assoc-in [:answered qid] a)
-      (let [score (answer-score (get-in @app-state [:attempts qid]))]
-            (swap! app-state update-in [:score] + score)))))
+      (when correct
+        (swap! app-state assoc-in [:answered qid] a)
+        (let [score (answer-score (get-in @app-state [:attempts qid]))]
+              (swap! app-state update-in [:score] + score))))))
 
 
 (defn question-view [qid]
@@ -67,11 +68,12 @@
                [:div
                   [:input {:name "answer" :className "answer-textfield"
                            :value @answer
-                           :on-change #(reset! answer (-> % .-target .-value .trim))} ]
+                           :on-change #(reset! answer (-> % .-target .-value))
+                           } ]
 
                   [:button {:className "button submit-button"
                             :on-click
-                             #(if (> (.-length @answer) 0) (submit-answer qid @answer))}
+                             #(submit-answer qid @answer)}
                             "Submit"]
 
                   (if attempts
